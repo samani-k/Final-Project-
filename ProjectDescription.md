@@ -1,25 +1,15 @@
 # CSCI 1300 Final Project
 
 ## Theme
-
-(TBA)
-
+TBA
 ## Goal
-
-Defeat the enemy/monster/titan? 
-
+TBA
 ## How to compile and run
-
-(TBA)
-
+TBA
 ## How to play
-
-(TBA)
-
+TBA
 ## Classes
-
-(TBA — list each class and what it does)
-
+TBA
 ## Extra credit
+TBA 
 
-(TBA — or write "None")

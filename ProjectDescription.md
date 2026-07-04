@@ -26,6 +26,7 @@ Win:
 - Reach the required follower count.
 - Complete all required MukHouse content challenges.
 - Submit an application before Day 28.
+
 Lose:
 - Day 28 arrives before the player qualifies for MukHouse.
 - The player runs out of money and cannot pay rent.

@@ -2,7 +2,7 @@
 
 ## Theme
 
-Mukbang social media personality's rise to fame
+MukHouse: Rise to Fame is a text-based game about becoming a successful mukbang content creator. The player travels to restaurants, films mukbang videos, earns followers and money, and works toward becoming popular enough to apply for the MukHouse content creator house.
 
 ## Goal
 

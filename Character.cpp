@@ -21,5 +21,3 @@ void Character::setName(string n) {
 void Character::display() {
     cout << "Name: " << name << endl;
 }
-
-// hi 

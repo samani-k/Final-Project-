@@ -1,11 +1,33 @@
 #include "Game.h"
 #include <iostream>
+#include <fstream> 
 using namespace std;
 
 Game::Game() {
     player = Player();
     restaurant = Restaurant("Burger Barn", 50);
     running = true;
+}
+
+bool Game::loadRestaurant(string filename) {
+    ifstream inputFile(filename);
+
+    if (!inputFile.is_open()) {
+        cout << "Could not open restaurant file." << endl;
+        return false;
+    }
+
+    string restaurantName;
+    int followers;
+
+    getline(inputFile, restaurantName);
+    inputFile >> followers;
+
+    restaurant = Restaurant(restaurantName, followers);
+
+    inputFile.close();
+
+    return true;
 }
 
 void Game::start() {
@@ -48,13 +70,12 @@ void Game::showStats() {
 }
 
 void Game::travel() {
-    player.moveTo("Burger Barn");
-    cout << "You traveled to Burger Barn." << endl;
+    player.moveTo(restaurant.getName());
+    cout << "You traveled to " << restaurant.getName() << "." << endl; 
 }
 
 void Game::film() {
-    if (player.getLocation() == "Burger Barn") {
-        player.addFollowers(restaurant.getFollowersGiven());
+if (player.getLocation() == restaurant.getName()) {        player.addFollowers(restaurant.getFollowersGiven());
         player.addMoney(25);
         cout << "You filmed a mukbang video!" << endl;
         cout << "You gained followers and money." << endl;

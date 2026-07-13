@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Restaurant.h"
+#include <string> 
 
 class Game {
 private:
@@ -18,6 +19,8 @@ public:
     void showStats();
     void travel();
     void film();
+    
+    bool loadRestaurant(string filename);
 };
 
 #endif

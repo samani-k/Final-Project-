@@ -23,9 +23,6 @@ public:
     string getRole();
     string getDialogue();
 
-    // Setter
-    void setLocation(string newLocation);
-
     // Display functions
     void talk();
     void displayCharacter();

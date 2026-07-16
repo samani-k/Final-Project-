@@ -36,18 +36,13 @@ string Character::getDialogue() {
     return dialogue;
 }
 
-// Setter
-void Character::setLocation(string newLocation) {
-    location = newLocation;
-}
-
-// Prints the character's dialogue
+// Prints the dialogue
 void Character::talk() {
     cout << name << " says:" << endl;
     cout << "\"" << dialogue << "\"" << endl;
 }
 
-// Displays basic character information
+// Displays character information
 void Character::displayCharacter() {
     cout << name << " - " << role << endl;
     cout << "Location: " << location << endl;

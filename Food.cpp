@@ -49,8 +49,6 @@ bool Food::isUnlocked(int playerFollowers){
 
 void Food::displayFood (){
     cout << name << "($" << price << "): " << endl;
-    cout << "- Requires: " << followerReq << " followers" << endl;
-    cout << "- Bonus: " << contentBonus << " followers" << endl; 
-}
+    }
 
 

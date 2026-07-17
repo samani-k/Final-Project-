@@ -6,6 +6,7 @@
 
 class Rival : public Character {
     private:
+    // Extra Credit Variables
     int skillLevel;
     bool banned;
     bool defeated;

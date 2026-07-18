@@ -34,21 +34,35 @@ Player::Player(string n) {
     addItem(Item("Basic Camera", "Equipment", 1));
 }
 
-string Player::getName() { return name; }
-int Player::getFollowers() { return followers; }
-int Player::getMoney() { return money; }
-int Player::getDramaPoints() { return dramaPoints; }
-int Player::getActionsRemaining() { return actionsRemaining; }
-string Player::getCurrentLocation() { return currentLocation; }
-int Player::getCameraLevel() { return cameraLevel; }
-int Player::getLightingLevel() { return lightingLevel; }
-int Player::getMicrophoneLevel() { return microphoneLevel; }
-int Player::getCompetitionWins() { return competitionWins; }
-int Player::getRivalsBanned() { return rivalsBanned; }
-int Player::getInventorySize() { return inventorySize; }
+string Player::getName() {
+     return name; }
+int Player::getFollowers() {
+     return followers; }
+int Player::getMoney() {
+     return money; }
+int Player::getDramaPoints() {
+     return dramaPoints; }
+int Player::getActionsRemaining() { 
+    return actionsRemaining; }
+string Player::getCurrentLocation() { 
+    return currentLocation; }
+int Player::getCameraLevel() { 
+    return cameraLevel; }
+int Player::getLightingLevel() {
+     return lightingLevel; }
+int Player::getMicrophoneLevel() { 
+    return microphoneLevel; }
+int Player::getCompetitionWins() { 
+    return competitionWins; }
+int Player::getRivalsBanned() { 
+    return rivalsBanned; }
+int Player::getInventorySize() { 
+    return inventorySize; }
 
-void Player::addFollowers(int amount) { followers += amount; }
-void Player::addMoney(int amount) { money += amount; }
+void Player::addFollowers(int amount) { 
+    followers += amount; }
+void Player::addMoney(int amount) { 
+    money += amount; }
 
 bool Player::spendMoney(int amount) {
     if (money < amount) return false;
@@ -56,7 +70,8 @@ bool Player::spendMoney(int amount) {
     return true;
 }
 
-void Player::addDrama(int amount) { dramaPoints += amount; }
+void Player::addDrama(int amount) {
+     dramaPoints += amount; }
 
 void Player::reduceDrama(int amount) {
     dramaPoints -= amount;
@@ -67,8 +82,10 @@ void Player::useAction() {
     if (actionsRemaining > 0) actionsRemaining--;
 }
 
-void Player::resetActions() { actionsRemaining = 3; }
-void Player::setCurrentLocation(string location) { currentLocation = location; }
+void Player::resetActions() { 
+    actionsRemaining = 3; }
+void Player::setCurrentLocation(string location) { 
+    currentLocation = location; }
 
 void Player::upgradeCamera() {
     cameraLevel++;

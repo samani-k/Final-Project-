@@ -1,47 +1,49 @@
-#include "Restaurant.h"
+#include "Rival.h"
 #include <iostream>
 using namespace std;
 
-Restaurant::Restaurant() {
-    name = "";
-    unlocked = false;
-    competitionDay = 0;
+//Inheritance 
+
+//Getters
+Rival::Rival() : Character() {
+    location = "";
+    dialogue = "";
+    skillLevel = 0;
+    banned = false;
 }
 
-Restaurant::Restaurant(string n, bool u, int day) {
-    name = n;
-    unlocked = u;
-    competitionDay = day;
+//Parameterized 
+Rival::Rival(string n, string loc, string role, string d, int skill)
+    : Character(n, role) {
+    location = loc;
+    dialogue = d;
+    skillLevel = skill;
+    banned = false;
 }
 
-string Restaurant::getName() { return name; }
-bool Restaurant::getUnlocked() { return unlocked; }
-int Restaurant::getCompetitionDay() { return competitionDay; }
-
-Food Restaurant::getFood(int index) {
-    if (index < 0 || index >= 4) return Food();
-    return foods[index];
+// Getters
+string Rival::getLocation() {
+    return location;
 }
 
-Rival Restaurant::getRival() { return rival; }
-void Restaurant::setUnlocked(bool value) { unlocked = value; }
-
-void Restaurant::setFood(int index, Food food) {
-    if (index >= 0 && index < 4) foods[index] = food;
+string Rival::getDialogue() {
+    return dialogue;
 }
 
-void Restaurant::setRival(Rival r) { rival = r; }
+int Rival::getSkillLevel() {
+    return skillLevel;
+}
+// Getter to see if rival is banned
+bool Rival::getBanned() {
+    return banned;
+}
 
-void Restaurant::displayFoods(int followers) {
-    cout << endl;
-    cout << name << " MENU" << endl;
-    cout << "----------------------------------------" << endl;
-    for (int i = 0; i < 4; i++) {
-        cout << i + 1 << ". " << foods[i].getName() << endl;
-        cout << "   Cost: $" << foods[i].getPrice() << endl;
-        if (foods[i].isUnlocked(followers)) cout << "   Available" << endl;
-        else cout << "   Locked until " << foods[i].getFollowerRequirement() << " followers" << endl;
-        cout << endl;
-    }
-    cout << "5. Cancel" << endl;
+//Setter for banned condition 
+void Rival::setBanned(bool value) {
+    banned = value;
+}
+
+// Talk function 
+void Rival::talk() {
+    cout << getName() << ": \"" << dialogue << "\"" << endl;
 }

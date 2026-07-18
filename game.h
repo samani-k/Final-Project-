@@ -9,7 +9,7 @@ using namespace std;
 class Game {
 private:
     Player player;
-    Restaurant restaurants[4];
+    Restaurant restaurants[4]; // Stores all restaurants in the game
     int restaurantCount;
     int currentDay;
     bool gameOver;
@@ -19,8 +19,11 @@ private:
     bool restaurantUnlockAnnounced[4];
     bool firstFeeExplained;
 
+    // Setup functions
     void setupRestaurants();
     void loadRivals();
+
+    // Menu and gameplay functions
     void displayIntroduction();
     void displayMainMenu();
     void displayMap();
@@ -32,13 +35,18 @@ private:
     void equipmentStore();
     void shadyAgency();
     void viewProfile();
+
+    // Handles day progression and competitions
     void endDay();
     void startNewDay();
     void processFees();
     void announceUnlocks();
     void announceCompetitionDay();
     void runCompetition(int index);
+
     void displayEnding();
+
+    // Helper functions for game calculations
     int getCurrentRestaurantIndex();
     int getRestaurantUnlockRequirement(int index);
     int getEquipmentBonus();
@@ -49,5 +57,7 @@ private:
 
 public:
     Game();
-    void startGame();
+    void startGame(); // Starts the main game loop
 };
+
+#endif

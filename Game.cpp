@@ -3,13 +3,15 @@
 #include <iostream>
 using namespace std;
 
+// Initializes the game state and prepares all restaurants and rivals.
 Game::Game() {
     restaurantCount = 4;
     currentDay = 1;
-    gameOver = false;
+     gameOver= false;
     playerQuit = false;
     firstFeeExplained = false;
 
+    // Sets all competition and unlock tracking values at the start.
     for (int i = 0; i < 4; i++) {
         competitionCompleted[i] = false;
         restaurantUnlockAnnounced[i] = (i == 0);
@@ -20,6 +22,7 @@ Game::Game() {
     loadRivals();
 }
 
+// Creates each restaurant and its four food options.
 void Game::setupRestaurants() {
     restaurants[0] = Restaurant("Raising Cane's", true, 5);
     restaurants[0].setFood(0, Food("Three Finger Combo", 35, 0, 900));
@@ -46,6 +49,7 @@ void Game::setupRestaurants() {
     restaurants[3].setFood(3, Food("Ultimate Hot Pot Feast", 300, 390000, 8200));
 }
 
+// Loads rival information from a file or uses defaults if the file cannot open.
 void Game::loadRivals() {
     ifstream inputFile("Rivals.txt");
 
@@ -75,6 +79,7 @@ void Game::loadRivals() {
     }
 }
 
+// Introduces the story and main goal to the player.
 void Game::displayIntroduction() {
     cout << endl;
     cout << "========================================" << endl;
@@ -84,9 +89,9 @@ void Game::displayIntroduction() {
     cout << "You have always wanted to become a content creator," << endl;
     cout << "but you never knew how to turn it into a real career." << endl;
     cout << endl;
-    cout << "Then your phone rings." << endl;
+    cout << "Luckily, opportunity strikes when your old friend Mia texts you." << endl;
     cout << endl;
-    cout << "Mia, your old friend, is now a creator manager in" << endl;
+    cout << "Mia tells you that she is now a creator manager in" << endl;
     cout << "Mukbang City. She has one ambitious idea:" << endl;
     cout << endl;
     cout << "Turn you into the city's next mukbang star." << endl;
@@ -101,6 +106,7 @@ void Game::displayIntroduction() {
     cout << "Accept Mia's offer? (y/n): ";
 }
 
+// Starts the game and repeats the main menu until an ending condition occurs.
 void Game::startGame() {
     displayIntroduction();
 
@@ -115,6 +121,7 @@ void Game::startGame() {
     cout << endl << "Enter your creator username: ";
     cin >> username;
     if (username.length() > 0 && username[0] == '@') username = username.substr(1);
+    //substr returns everything except first letter, returns john
     player = Player(username);
 
     cout << endl;
@@ -140,6 +147,7 @@ void Game::startGame() {
     cout << "Reach 500,000 followers before the end of Day 28." << endl;
     cout << "Day 1 begins at your apartment." << endl;
 
+    // Main game loop.
     while (!gameOver) {
         displayMainMenu();
         int choice;
@@ -153,6 +161,7 @@ void Game::startGame() {
     displayEnding();
 }
 
+// Displays all locations and marks the player's current location.
 void Game::displayMap() {
     string apartment = player.getCurrentLocation() == "Apartment" ? "[*Apartment]" : "[Apartment]";
     string equipment = player.getCurrentLocation() == "Equipment Store" ? "[*Equipment Store]" : "[Equipment Store]";
@@ -179,6 +188,7 @@ void Game::displayMap() {
     cout << "* = current location" << endl;
 }
 
+// Displays the player's current statistics and available actions.
 void Game::displayMainMenu() {
     cout << endl;
     cout << "----------------------------------------" << endl;
@@ -202,12 +212,18 @@ void Game::displayMainMenu() {
     cout << endl << "Choice: ";
 }
 
+// Sends the player's menu choice to the correct gameplay function.
 void Game::handleMainMenuChoice(int choice) {
-    if (choice == 1) travel();
-    else if (choice == 2) createContent();
-    else if (choice == 3) enterLocation();
-    else if (choice == 4) viewProfile();
-    else if (choice == 5) endDay();
+    if (choice == 1)
+     travel();
+    else if (choice == 2) 
+    createContent();
+    else if (choice == 3) 
+    enterLocation();
+    else if (choice == 4) 
+    viewProfile();
+    else if (choice == 5) 
+    endDay();
     else if (choice == 6) {
         char confirm;
         cout << "Quit the game? (y/n): ";
@@ -225,6 +241,7 @@ int Game::getRestaurantUnlockRequirement(int index) {
     return requirements[index];
 }
 
+// Finds which restaurant the player is currently visiting.
 int Game::getCurrentRestaurantIndex() {
     for (int i = 0; i < 4; i++) {
         if (player.getCurrentLocation() == restaurants[i].getName()) return i;
@@ -232,6 +249,7 @@ int Game::getCurrentRestaurantIndex() {
     return -1;
 }
 
+// Allows the player to move between unlocked locations for free.
 void Game::travel() {
     cout << endl;
     cout << "TRAVEL" << endl;
@@ -275,12 +293,14 @@ void Game::travel() {
     cout << endl << "You traveled to " << destination << "." << endl;
 }
 
+// Calculates the follower bonus provided by all equipment upgrades.
 int Game::getEquipmentBonus() {
     return (player.getCameraLevel() - 1) * 250
         + player.getLightingLevel() * 300
         + player.getMicrophoneLevel() * 250;
 }
 
+// Calculates follower growth using food, equipment, content type, and variation.
 int Game::getContentFollowers(Food food, int contentChoice) {
     int variation = (currentDay * 137 + player.getActionsRemaining() * 83 + player.getFollowers()) % 501;
     int followers = food.getContentBonus() + getEquipmentBonus();
@@ -299,12 +319,14 @@ int Game::getContentMoney(int contentChoice) {
     return 40;
 }
 
+// Live-stream donations increase as the player's follower count grows.
 int Game::getLiveDonations() {
     int base = player.getFollowers() / 250;
     int variation = (currentDay * 29 + player.getActionsRemaining() * 47 + player.getFollowers()) % 121;
     return base + variation;
 }
 
+// Handles purchasing food, choosing content, and receiving content rewards.
 void Game::createContent() {
     if (player.getActionsRemaining() == 0) {
         cout << "You have no actions remaining today." << endl;
@@ -392,6 +414,7 @@ void Game::createContent() {
     announceUnlocks();
 }
 
+// Opens the correct menu based on the player's current location.
 void Game::enterLocation() {
     if (player.getCurrentLocation() == "Apartment") apartmentMenu();
     else if (player.getCurrentLocation() == "Equipment Store") equipmentStore();
@@ -402,6 +425,7 @@ void Game::enterLocation() {
     }
 }
 
+// Allows the player to ask Mia for game instructions.
 void Game::apartmentMenu() {
     cout << endl;
     cout << "APARTMENT" << endl;
@@ -437,6 +461,7 @@ void Game::apartmentMenu() {
     }
 }
 
+// Lets the player purchase equipment that improves future content.
 void Game::equipmentStore() {
     cout << endl;
     cout << "EQUIPMENT STORE" << endl;
@@ -493,6 +518,7 @@ void Game::equipmentStore() {
     cout << "Upgrade purchased. Your content will now perform more consistently." << endl;
 }
 
+// Offers risky shortcuts that trade money and Drama for faster progress.
 void Game::shadyAgency() {
     cout << endl;
     cout << "SHADY CREATOR AGENCY" << endl;
@@ -599,6 +625,7 @@ void Game::shadyAgency() {
     announceUnlocks();
 }
 
+// Displays the player's progress, equipment, and inventory.
 void Game::viewProfile() {
     cout << endl;
     cout << "PLAYER PROFILE" << endl;
@@ -628,6 +655,7 @@ void Game::viewProfile() {
     cin >> choice;
 }
 
+// Announces newly available restaurants and foods without repeating messages.
 void Game::announceUnlocks() {
     for (int i = 1; i < 4; i++) {
         if (!restaurantUnlockAnnounced[i]
@@ -663,6 +691,7 @@ void Game::announceUnlocks() {
     }
 }
 
+// Checks whether the current day contains a scheduled competition.
 void Game::announceCompetitionDay() {
     for (int i = 0; i < 4; i++) {
         if (currentDay == restaurants[i].getCompetitionDay()) {
@@ -707,6 +736,7 @@ void Game::announceCompetitionDay() {
     }
 }
 
+// Calculates the player and rival scores, then awards the competition result.
 void Game::runCompetition(int index) {
     Rival rival = restaurants[index].getRival();
     player.useAction();
@@ -746,6 +776,7 @@ void Game::runCompetition(int index) {
         cout << "- rival difficulty" << endl;
         cout << endl;
 
+        // Combines player progress and penalties into one competition score.
         int playerScore = player.getFollowers() / 5000
             + player.getCameraLevel() * 3
             + player.getLightingLevel() * 2
@@ -767,6 +798,7 @@ void Game::runCompetition(int index) {
         }
     }
 
+    // Competition rewards become larger at later restaurants.
     int rewards[4] = {10000, 18000, 28000, 50000};
     int moneyRewards[4] = {500, 750, 1000, 1600};
     player.addFollowers(rewards[index]);
@@ -785,6 +817,7 @@ void Game::runCompetition(int index) {
     announceUnlocks();
 }
 
+// Charges rent and the manager fee at the end of each week.
 void Game::processFees() {
     if (currentDay == 7 || currentDay == 14 || currentDay == 21 || currentDay == 28) {
         int rent = 600;
@@ -815,6 +848,7 @@ void Game::processFees() {
     }
 }
 
+// Restores daily actions and checks fees and competitions.
 void Game::startNewDay() {
     player.resetActions();
     player.setCurrentLocation("Apartment");
@@ -828,6 +862,7 @@ void Game::startNewDay() {
     if (!gameOver) announceCompetitionDay();
 }
 
+// Records daily results and advances the game to the next day.
 void Game::endDay() {
     cout << endl;
     cout << "----------------------------------------" << endl;
@@ -846,6 +881,7 @@ void Game::endDay() {
     startNewDay();
 }
 
+// Finds the next locked food or restaurant based on follower count.
 string Game::getNextUnlockText() {
     int followers = player.getFollowers();
 
@@ -867,6 +903,7 @@ string Game::getNextUnlockText() {
     return "Reach 500000 followers";
 }
 
+// Displays the ending that matches the player's final game state.
 void Game::displayEnding() {
     cout << endl;
     cout << "========================================" << endl;

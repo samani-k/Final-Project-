@@ -15,14 +15,19 @@ private:
     Rival rival;
 
 public:
+
+//Constructors 
     Restaurant();
     Restaurant(string n, bool u, int day);
 
+//Getters
     string getName();
     bool getUnlocked();
     int getCompetitionDay();
     Food getFood(int index);
     Rival getRival();
+
+//Setters
     void setUnlocked(bool value);
     void setFood(int index, Food food);
     void setRival(Rival r);

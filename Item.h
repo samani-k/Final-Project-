@@ -1,32 +1,23 @@
-//Home of Permanent Inventory Items 
-#include <string>
 #ifndef ITEM_H
 #define ITEM_H
 
+#include <string>
 using namespace std;
 
 class Item {
-    private:
-    string name; 
-    string type; //Organization of Inventory items
+private:
+    string name;
+    string type;
     int level;
-    int value; 
 
-    public: 
-    //Default Constructor
-    Item ();
+public:
+    Item();
+    Item(string n, string t, int l);
 
-    //Constructor for all variables 
-    Item (string n, string t, int l, int v); 
-    
-    // Getters
     string getName();
     string getType();
     int getLevel();
-    int getValue(); 
+    void setLevel(int l);
+};
 
-    //Display Function
-    void displayItem (); 
-}; 
-
-#endif 
+#endif

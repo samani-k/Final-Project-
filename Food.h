@@ -5,27 +5,21 @@
 using namespace std;  
 
 class Food {
-    private:
-    string name; 
+private:
+    string name;
     int price;
-    int followerReq;
+    int followerRequirement;
     int contentBonus;
 
-    public:
-    //Default Constructor
-    Food ();      
+public:
+    Food();
+    Food(string n, int p, int req, int bonus);
 
-    //Parameterized Constructor
-    Food (string n, int p, int f, int c); 
-
-    // Getters
-   string getName(); 
-   int getPrice();
-   int getfollowerReq();
-   int getcontentBonus();
-
-   bool isUnlocked(int playerFollowers);
-   void displayFood();
-
+    string getName();
+    int getPrice();
+    int getFollowerRequirement();
+    int getContentBonus();
+    bool isUnlocked(int followers);
 };
+
 #endif

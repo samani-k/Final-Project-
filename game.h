@@ -1,56 +1,53 @@
-#include <string>
-#include "Player.h"
-#include "Restaurant.h"
-
 #ifndef GAME_H
 #define GAME_H
 
+#include "Player.h"
+#include "Restaurant.h"
+#include <string>
 using namespace std;
 
 class Game {
 private:
     Player player;
     Restaurant restaurants[4];
-
     int restaurantCount;
     int currentDay;
     bool gameOver;
     bool playerQuit;
-
-public:
-    Game();
-    Game(string playerName);
+    bool competitionCompleted[4];
+    bool foodUnlockAnnounced[4][4];
+    bool restaurantUnlockAnnounced[4];
+    bool firstFeeExplained;
 
     void setupRestaurants();
     void loadRivals();
-
     void displayIntroduction();
-    void startGame();
     void displayMainMenu();
     void displayMap();
     void handleMainMenuChoice(int choice);
-
     void travel();
     void createContent();
-    void talkToRival();
-    void upgradeEquipment();
-    void viewStats();
-    void visitShadyAgency();
+    void enterLocation();
+    void apartmentMenu();
+    void equipmentStore();
+    void shadyAgency();
+    void viewProfile();
     void endDay();
-
-    void checkCompetition();
-    void runCompetition(int restaurantIndex);
-
-    bool checkWin();
-    bool checkLoss();
+    void startNewDay();
+    void processFees();
+    void announceUnlocks();
+    void announceCompetitionDay();
+    void runCompetition(int index);
     void displayEnding();
-
     int getCurrentRestaurantIndex();
-    int getRestaurantUnlockRequirement(int restaurantIndex);
-    int calculateEquipmentBonus();
+    int getRestaurantUnlockRequirement(int index);
+    int getEquipmentBonus();
+    int getContentFollowers(Food food, int contentChoice);
+    int getContentMoney(int contentChoice);
+    int getLiveDonations();
+    string getNextUnlockText();
 
-    int getCurrentDay();
-    bool getGameOver();
+public:
+    Game();
+    void startGame();
 };
-
-#endif

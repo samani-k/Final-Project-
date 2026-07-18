@@ -2,24 +2,33 @@
 
 ## Theme
 
-MukHouse: Rise to Fame is a text-based game about becoming a successful mukbang content creator. The player travels to restaurants, films mukbang videos, earns followers and money, and works toward becoming popular enough to apply for the MukHouse content creator house.
+### Mukbang City
+The player begins as an aspiring mukbang content creator with limited resources and the help of their friend and manager, Mia. By exploring Mukbang City, creating content, upgrading equipment and restaurants, completing challenges, and competing against a rival creator, they must gain enough followers to earn a spot in the famous content creator house, "MukHouse", before applications close in 28 days.
 
 ## Goal
-
-Gain as many followers as possible
+Gain 500,000 followers by the end of day 28 by navigating Mukbang City in order to apply for the MukHouse application. 
 
 ## How to compile and run
+1. First paste
+g++ -Wall -Werror -Wpedantic Main.cpp Game.cpp Character.cpp Rival.cpp Food.cpp Item.cpp Player.cpp Restaurant.cpp -o Final-Project-
 
-(TBA)
+2. Then paste
+./exe
 
 ## How to play
-
-(TBA)
+Travel to different Restaurants
+Purchase Food Items 
+Create Content
+Unlock new foods and restaurants
+Upgrade Equipment
+Compete against rivals
+Buy from Shady Agency
+Pay Rent and Manager Fee
 
 ## Classes
 
 (TBA — list each class and what it does)
 
 ## Extra credit
-
-(TBA — or write "None")
+Featured Mukbanger Rival System:  
+Restaurants can only feature one creator at a time. The player can compete in a competition that occurs only once at every restaurant against the Featured Mukbanger for the badge title of "Featured Mukbanger".

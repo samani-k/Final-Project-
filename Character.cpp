@@ -6,44 +6,33 @@ using namespace std;
 // Default constructor
 Character::Character() {
     name = "";
-    location = "";
     role = "";
-    dialogue = "";
 }
 
 // Parameterized constructor
-Character::Character(string n, string l, string r, string d) {
+Character::Character(string n, string r) {
     name = n;
-    location = l;
     role = r;
-    dialogue = d;
 }
+
 
 // Getters
 string Character::getName() {
     return name;
 }
 
-string Character::getLocation() {
-    return location;
-}
-
 string Character::getRole() {
     return role;
 }
 
-string Character::getDialogue() {
-    return dialogue;
+//Setters
+void Character::setName(string n) { 
+    name = n; 
 }
-
-// Prints the dialogue
+void Character::setRole(string r) { 
+    role = r; 
+}
+// Prints dialogue
 void Character::talk() {
-    cout << name << " says:" << endl;
-    cout << "\"" << dialogue << "\"" << endl;
-}
-
-// Displays character information
-void Character::displayCharacter() {
-    cout << name << " - " << role << endl;
-    cout << "Location: " << location << endl;
-}
+     cout << name << " has nothing to say." << endl; 
+    }

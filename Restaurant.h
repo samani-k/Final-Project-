@@ -1,46 +1,32 @@
-#include <string>
-#include "Rival.h"
-#include "Food.h"
 #ifndef RESTAURANT_H
 #define RESTAURANT_H
 
+#include "Food.h"
+#include "Rival.h"
+#include <string>
 using namespace std;
 
 class Restaurant {
-    private:
+private:
     string name;
-    Food foods [4]; // Each restaurant only has 4 foods, set size
-    Rival rival; // Each restaurant has its own featured creator/rival
-    bool unlocked; // Restaurant open or closed
-    bool playerFeatured; 
-    bool competitionCompleted;
-    int competitionDay; //Competiton linked to a certain day
+    bool unlocked;
+    int competitionDay;
+    Food foods[4];
+    Rival rival;
 
-    public: 
-//Default Constructor 
-   Restaurant ();
-//Parameterized Constructor 
-   Restaurant (string n, bool u, int cd);
-// Getters
+public:
+    Restaurant();
+    Restaurant(string n, bool u, int day);
+
     string getName();
     bool getUnlocked();
-    bool getplayerFeatured();
-    bool getcompetitionCompleted();
-    int getcompetitionDay();
-    Rival getRival ();
-    Food getFood(int ind);
-// Setters
-    void setUnlocked(bool status);
-    void setplayerFeatured(bool status);
-    void setcompetitionCompleted(bool status);
+    int getCompetitionDay();
+    Food getFood(int index);
+    Rival getRival();
+    void setUnlocked(bool value);
+    void setFood(int index, Food food);
     void setRival(Rival r);
-    void setFood(int ind, Food newFood); 
-
-//Methods
-int countUnlockedFoods (int playerFollowers);
-void displayFoods (int playerFollowers);
-void displayRestaurant(); 
-
+    void displayFoods(int followers);
 };
 
 #endif

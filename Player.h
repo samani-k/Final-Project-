@@ -1,87 +1,58 @@
-#include <string>
-#include <iostream> 
-#include "Item.h"
-
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Item.h"
+#include <string>
 using namespace std;
 
 class Player {
-    private:
+private:
     string name;
-    string currentLocation;
-    
     int followers;
     int money;
     int dramaPoints;
     int actionsRemaining;
-
+    string currentLocation;
     int cameraLevel;
     int lightingLevel;
     int microphoneLevel;
+    int competitionWins;
+    int rivalsBanned;
+    Item inventory[12];
+    int inventorySize;
 
-    int legitimateWins;
-    int rivalsBotted;
-
-    Item inventory[20];
-    int inventorySize; 
-
-    public:
-    // Constructors
+public:
     Player();
     Player(string n);
 
-    // Getters
     string getName();
-    string getCurrentLocation();
-
     int getFollowers();
     int getMoney();
     int getDramaPoints();
     int getActionsRemaining();
-
+    string getCurrentLocation();
     int getCameraLevel();
     int getLightingLevel();
     int getMicrophoneLevel();
-
-    int getLegitimateWins();
-    int getRivalsBotted();
+    int getCompetitionWins();
+    int getRivalsBanned();
     int getInventorySize();
 
-   // Location
-    void setCurrentLocation(string location);
-
-    // Followers
     void addFollowers(int amount);
-    void loseFollowers(int amount);
-
-    // Money
     void addMoney(int amount);
     bool spendMoney(int amount);
-
-    // Drama
     void addDrama(int amount);
     void reduceDrama(int amount);
-
-    // Actions
-    void resetActions();
     void useAction();
-
-    // Equipment
+    void resetActions();
+    void setCurrentLocation(string location);
     void upgradeCamera();
     void upgradeLighting();
     void upgradeMicrophone();
-
-    // Competition tracking
-    void addLegitimateWin();
-    void addRivalBotted();
-
-    // Inventory
-    void addItem(Item newItem);
-    bool hasItem(string itemName);
-    int countItemsOfType(string itemType);
+    void addCompetitionWin();
+    void addRivalBanned();
+    void addItem(Item item);
     void displayInventory();
-
 };
+
 #endif

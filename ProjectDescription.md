@@ -1,8 +1,10 @@
 # CSCI 1300 Final Project
 
 ## Theme
-Mukbang: Rise to Fame
-The player starts as a small mukbang content creator with very few followers and limited money. They must travel to different restaurants, create mukbang videos, upgrade restaurants and equipment, complete content challenges, and compete against a rival creator in order to earn enough followers to be accepted into the famous MukHouse before applications close.
+
+### Mukbang City
+The player begins as an aspiring mukbang content creator with limited resources and the help of their friend and manager, Mia. By exploring Mukbang City, creating content, upgrading equipment and restaurants, completing challenges, and competing against a rival creator, they must gain enough followers to earn a spot in the famous content creator house, "MukHouse", before applications close in 28 days.
+
 ## Classes
 This game includes 7 classes:
 1. Item
@@ -13,19 +15,26 @@ This game includes 7 classes:
 6. Player
 7. Game
 ## Limited Resource
-Money - Used to travel, purchase food, upgrade restaurants, buy equipment, pay rent, and purchase advantages from the Shady Creator Agency.
-Followers - Required to unlock new restaurants, sponsorships, competitions, and ultimately qualify for MukHouse.
+1. Money - Used to travel, purchase food, upgrade restaurants, buy equipment, pay rent, and purchase advantages from the Shady Creator Agency.
+2. Followers - Required to unlock new restaurants, sponsorships, competitions, and ultimately qualify for MukHouse.
+
 ## Time 
-28 days to apply for the Mukbang content creator house
+There are 28 days to apply for the Mukbang content creator house.
+Each day contains 3 actions.
+The day ends when the player decides or after all 3 actions are used.
+
 ## Extra Credit 
-Featured Mukbanger System - Restaurants can only feature one creator at a time. The player can compete against the rival mukbanger to become the restaurant's Featured Mukbanger, increasing the followers earned at that location until the rival takes the title back.
+Featured Mukbanger Rival System:  
+Restaurants can only feature one creator at a time. The player can compete in a competition that occurs only once at every restaurant against the Featured Mukbanger for the badge title of "Featured Mukbanger".
+
 ## Tradeoff System
-Shady Creator Agency: Buy fake followers, bot rival accounts, fake reviews, trend manipulations 
+Shady Creator Agency: Buy fake followers and bot rival accounts before competitons, but for a cost and consequence. 
+
 ## Mapping Style
-Map of different restaurants that the player can go to for recording videos. Also includes an item shop where player can buy certain upgrades/advantanges.
+Map includes different restaurants for content creation, the apartment, the equipment store, and the Shady Agency.
+
 ## Win/Lose Condition 
 Win:
 - Reach the required follower count by day 28.
-
 Lose:
-- Day 28 arrives before the player qualifies for MukHouse.
+- Day 28 arrives before the player reaches followe requirement for the MukHouse.

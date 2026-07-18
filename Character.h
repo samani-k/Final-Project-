@@ -8,24 +8,23 @@ using namespace std;
 class Character {
 private:
     string name;
-    string location;
     string role;
-    string dialogue;
 
 public:
     // Constructors
     Character();
-    Character(string n, string l, string r, string d);
+    Character(string n,string r);
 
     // Getters
     string getName();
-    string getLocation();
     string getRole();
-    string getDialogue();
+
 
     // Display functions
-    void talk();
-    void displayCharacter();
+    void setName (string n);
+    void setRole (string r);
+    virtual void talk();
+    // Virtual makes it so the program looks at the object and runs the code that matches up correctly
 };
 
 

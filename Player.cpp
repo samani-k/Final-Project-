@@ -1,237 +1,118 @@
 #include "Player.h"
 #include <iostream>
-
 using namespace std;
 
-// Default constructor
 Player::Player() {
     name = "";
-    currentLocation = "Apartment";
-
     followers = 0;
     money = 3000;
     dramaPoints = 0;
     actionsRemaining = 3;
-
+    currentLocation = "Apartment";
     cameraLevel = 1;
-    lightingLevel = 1;
-    microphoneLevel = 1;
-
-    legitimateWins = 0;
-    rivalsBotted = 0;
-
+    lightingLevel = 0;
+    microphoneLevel = 0;
+    competitionWins = 0;
+    rivalsBanned = 0;
     inventorySize = 0;
-
-    Item basicCamera("Basic Camera", "Equipment", 1, 0);
-    addItem(basicCamera);
+    addItem(Item("Basic Camera", "Equipment", 1));
 }
 
-// Parameterized constructor
 Player::Player(string n) {
     name = n;
-    currentLocation = "Apartment";
-
     followers = 0;
     money = 3000;
     dramaPoints = 0;
     actionsRemaining = 3;
-
+    currentLocation = "Apartment";
     cameraLevel = 1;
-    lightingLevel = 1;
-    microphoneLevel = 1;
-
-    legitimateWins = 0;
-    rivalsBotted = 0;
-
+    lightingLevel = 0;
+    microphoneLevel = 0;
+    competitionWins = 0;
+    rivalsBanned = 0;
     inventorySize = 0;
-
-    Item basicCamera("Basic Camera", "Equipment", 1, 0);
-    addItem(basicCamera);
+    addItem(Item("Basic Camera", "Equipment", 1));
 }
 
-// Getters
-string Player::getName() {
-    return name;
-}
+string Player::getName() { return name; }
+int Player::getFollowers() { return followers; }
+int Player::getMoney() { return money; }
+int Player::getDramaPoints() { return dramaPoints; }
+int Player::getActionsRemaining() { return actionsRemaining; }
+string Player::getCurrentLocation() { return currentLocation; }
+int Player::getCameraLevel() { return cameraLevel; }
+int Player::getLightingLevel() { return lightingLevel; }
+int Player::getMicrophoneLevel() { return microphoneLevel; }
+int Player::getCompetitionWins() { return competitionWins; }
+int Player::getRivalsBanned() { return rivalsBanned; }
+int Player::getInventorySize() { return inventorySize; }
 
-string Player::getCurrentLocation() {
-    return currentLocation;
-}
-
-int Player::getFollowers() {
-    return followers;
-}
-
-int Player::getMoney() {
-    return money;
-}
-
-int Player::getDramaPoints() {
-    return dramaPoints;
-}
-
-int Player::getActionsRemaining() {
-    return actionsRemaining;
-}
-
-int Player::getCameraLevel() {
-    return cameraLevel;
-}
-
-int Player::getLightingLevel() {
-    return lightingLevel;
-}
-
-int Player::getMicrophoneLevel() {
-    return microphoneLevel;
-}
-
-int Player::getLegitimateWins() {
-    return legitimateWins;
-}
-
-int Player::getRivalsBotted() {
-    return rivalsBotted;
-}
-
-int Player::getInventorySize() {
-    return inventorySize;
-}
-
-// Location
-void Player::setCurrentLocation(string location) {
-    currentLocation = location;
-}
-
-// Followers
-void Player::addFollowers(int amount) {
-    if (amount > 0) {
-        followers += amount;
-    }
-}
-
-void Player::loseFollowers(int amount) {
-    if (amount > 0) {
-        followers -= amount;
-
-        if (followers < 0) {
-            followers = 0;
-        }
-    }
-}
-
-// Money
-void Player::addMoney(int amount) {
-    if (amount > 0) {
-        money += amount;
-    }
-}
+void Player::addFollowers(int amount) { followers += amount; }
+void Player::addMoney(int amount) { money += amount; }
 
 bool Player::spendMoney(int amount) {
-    if (amount >= 0 && money >= amount) {
-        money -= amount;
-        return true;
-    }
-
-    return false;
+    if (money < amount) return false;
+    money -= amount;
+    return true;
 }
 
-// Drama
-void Player::addDrama(int amount) {
-    if (amount > 0) {
-        dramaPoints += amount;
-    }
-}
+void Player::addDrama(int amount) { dramaPoints += amount; }
 
 void Player::reduceDrama(int amount) {
-    if (amount > 0) {
-        dramaPoints -= amount;
-
-        if (dramaPoints < 0) {
-            dramaPoints = 0;
-        }
-    }
-}
-
-// Actions
-void Player::resetActions() {
-    actionsRemaining = 3;
+    dramaPoints -= amount;
+    if (dramaPoints < 0) dramaPoints = 0;
 }
 
 void Player::useAction() {
-    if (actionsRemaining > 0) {
-        actionsRemaining--;
-    }
+    if (actionsRemaining > 0) actionsRemaining--;
 }
 
-// Equipment
+void Player::resetActions() { actionsRemaining = 3; }
+void Player::setCurrentLocation(string location) { currentLocation = location; }
+
 void Player::upgradeCamera() {
-    if (cameraLevel < 3) {
-        cameraLevel++;
-    }
+    cameraLevel++;
+    inventory[0].setLevel(cameraLevel);
 }
 
 void Player::upgradeLighting() {
-    if (lightingLevel < 3) {
-        lightingLevel++;
+    lightingLevel++;
+    if (lightingLevel == 1) addItem(Item("Studio Lighting", "Equipment", 1));
+    else {
+        for (int i = 0; i < inventorySize; i++) {
+            if (inventory[i].getName() == "Studio Lighting") inventory[i].setLevel(lightingLevel);
+        }
     }
 }
 
 void Player::upgradeMicrophone() {
-    if (microphoneLevel < 3) {
-        microphoneLevel++;
+    microphoneLevel++;
+    if (microphoneLevel == 1) addItem(Item("External Microphone", "Equipment", 1));
+    else {
+        for (int i = 0; i < inventorySize; i++) {
+            if (inventory[i].getName() == "External Microphone") inventory[i].setLevel(microphoneLevel);
+        }
     }
 }
 
-// Competition tracking
-void Player::addLegitimateWin() {
-    legitimateWins++;
-}
+void Player::addCompetitionWin() { competitionWins++; }
+void Player::addRivalBanned() { rivalsBanned++; }
 
-void Player::addRivalBotted() {
-    rivalsBotted++;
-}
-
-// Inventory
-void Player::addItem(Item newItem) {
-    if (inventorySize < 20) {
-        inventory[inventorySize] = newItem;
+void Player::addItem(Item item) {
+    if (inventorySize < 12) {
+        inventory[inventorySize] = item;
         inventorySize++;
     }
 }
 
-bool Player::hasItem(string itemName) {
-    for (int i = 0; i < inventorySize; i++) {
-        if (inventory[i].getName() == itemName) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-int Player::countItemsOfType(string itemType) {
-    int count = 0;
-
-    for (int i = 0; i < inventorySize; i++) {
-        if (inventory[i].getType() == itemType) {
-            count++;
-        }
-    }
-
-    return count;
-}
-
 void Player::displayInventory() {
-    cout << "~~~~~~~~~~ INVENTORY ~~~~~~~~~~" << endl;
-
-    if (inventorySize == 0) {
-        cout << "Inventory is empty." << endl;
-        return;
-    }
-
+    cout << "Inventory:" << endl;
+    if (inventorySize == 0) cout << "- Empty" << endl;
     for (int i = 0; i < inventorySize; i++) {
-        cout << i + 1 << ") ";
-        inventory[i].displayItem();
+        cout << "- " << inventory[i].getName();
+        if (inventory[i].getType() == "Equipment") {
+            cout << " - Level " << inventory[i].getLevel();
+        }
+        cout << endl;
     }
 }
